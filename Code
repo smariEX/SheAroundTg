@@ -1,26 +1,50 @@
-from email import message
+import types
 
 import telebot
-
-
 bot = telebot.TeleBot('6659669752:AAHyE0s8hafvOmyLpkXMXvlT6JZPPToEQ3c')
 
 
+        @bot.message_handler(commands=["start"])
+        def start(m, res=False, item3=None, item4=None):
 
-@bot.message_handler(commands=['start'])
-def main(message):
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            item1 = types.KeyboardButton("Cleo-файлы")
+            item2 = types.KeyboardButton("Сборки")
+            markup.add(item1)
+            markup.add(item2)
+            bot.send_message(m.chat.id,'Нажми: \nCleo-файлы или сборки для дальнейшего выбора и получения', reply_markup=markup)
 
-    bot.send_message(message.chat.id, f'Привет!, {message.from_user.first_name} {message.from_user.last_name}')
 
-@bot.message_handler(commands=['help'])
-def main(message):
-    bot.send_message(message.chat.id, "Help information")
 
-@bot.massage_handler()
-def info(message):
-    if message.text.lower() == 'привет':
-        bot.send_message(message.chat.id, f'Привет!, {message.from_user.first_name} {message.from_user.last_name}')
-    elif message.text.lower() == 'id':
-        bot.reply_to(message, f'ID: {message.from_user.id}')
+        @bot.message_handler(content_types=["text"])
+        def handle_text(message, markup=None):
+            if message.text.strip() == 'Cleo-файлы':
+                markup2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                item3 = types.KeyboardButton("Timecyc")
+                item4 = types.KeyboardButton("MVD_helper")
+                markup.add(item3)
+                markup.add(item4)
+            elif message.text.strip() == 'Сборки':
+                markup2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                item5 = types.KeyboardButton("Время_года")
+                item6 = types.KeyboardButton("Для_ловли")
+                markup.add(item5)
+                markup.add(item6)
+                bot.send_message(m.chat.id, 'Нажми: \nУточни, что тебе именно нужно',reply_markup=markup)
 
-bot.polling(none_stop=True)
+        @bot.message_handler(content_types=["text"])
+        def handle_text(message, markup=None):
+            if message.text.strip() == 'Timecyc':
+                
+
+            elif message.text.strip() == 'Сборки':
+                    markup2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+
+
+
+
+            # Отсылаем юзеру сообщение в его чат
+            bot.send_message(message.chat.id, answer)
+
+
+        bot.polling(none_stop=True, interval=0)
