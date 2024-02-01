@@ -1,7 +1,15 @@
-import types
 
 import telebot
-bot = telebot.TeleBot('6659669752:AAHyE0s8hafvOmyLpkXMXvlT6JZPPToEQ3c')
+
+
+bot: telebot.TeleBot = telebot.TeleBot('6659669752:AAHyE0s8hafvOmyLpkXMXvlT6JZPPToEQ3c')
+
+
+
+        @bot.message_handler(content_types=['photo'])
+        def get_photo(message) :
+         bot.reply_to(message, 'Kaкoe Kpacuвoe фото!')
+
 
 
         @bot.message_handler(commands=["start"])
@@ -13,7 +21,9 @@ bot = telebot.TeleBot('6659669752:AAHyE0s8hafvOmyLpkXMXvlT6JZPPToEQ3c')
             markup.add(item1)
             markup.add(item2)
             bot.send_message(m.chat.id,'Нажми: \nCleo-файлы или сборки для дальнейшего выбора и получения', reply_markup=markup)
+            bot.register_next_step_handler(message, stats1)
 
+        def stats1(message):
 
 
         @bot.message_handler(content_types=["text"])
@@ -35,16 +45,31 @@ bot = telebot.TeleBot('6659669752:AAHyE0s8hafvOmyLpkXMXvlT6JZPPToEQ3c')
         @bot.message_handler(content_types=["text"])
         def handle_text(message, markup=None):
             if message.text.strip() == 'Timecyc':
-                
+                markup2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                bot.send_message(m.chat.id, '\nhttps://www.blast.hk/threads/26409/',reply_markup=markup)
+                bot.send_message(m.chat.id, '\nВыше ссылка на файл + инструкция по установке/активации', reply_markup=markup)
+            elif message.text.strip() == 'MVD_helper':
+                markup2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                bot.send_message(m.chat.id, '\nhttps://mvdhelper.ru', reply_markup=markup)
+                bot.send_message(m.chat.id, '\nВыше ссылка на официальный сайт',reply_markup=markup)
 
-            elif message.text.strip() == 'Сборки':
+        @bot.message_handler(content_types=["text"])
+        def handle_text(message, markup=None):
+                if message.text.strip() == 'Время_года':
                     markup2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                    bot.send_message(m.chat.id, '\nhttps://www.youtube.com/watch?v=6XAsPm7UdhQ', reply_markup=markup)
+                    bot.send_message(m.chat.id, '\nВыше ссылка на ролик',reply_markup=markup)
+                elif message.text.strip() == 'Для_ловли':
+                    markup2 = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                    bot.send_message(m.chat.id, '\nhttps://www.youtube.com/watch?v=Bj4adXYVGkM', reply_markup=markup)
+                    bot.send_message(m.chat.id, '\nВыше ссылка на ролик',reply_markup=markup)
 
 
+bot.send_message(message.chat.id, answer)
 
 
-            # Отсылаем юзеру сообщение в его чат
-            bot.send_message(message.chat.id, answer)
+bot.polling(none_stop=True, interval=0)
 
 
-        bot.polling(none_stop=True, interval=0)
+import types
+from email import message
