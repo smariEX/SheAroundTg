@@ -10,6 +10,55 @@ bot: telebot.TeleBot = telebot.TeleBot('6659669752:AAHyE0s8hafvOmyLpkXMXvlT6JZPP
         def get_photo(message) :
          bot.reply_to(message, 'Kaкoe Kpacuвoe фото!')
 
+for i in range (len(spisok)):
+if spisok[i]== "П":
+for j in range (12):
+slovo += spisok[i+j]
+if slovo == "Похожиеслова":
+print(slovo)
+spisok[i+11] = slovo
+print(spisok)
+if j== 11:
+slovo= ""
+
+if spisok[i] == "О":
+for j in range(45):
+slovo2 += spisok[i + j]
+if slovo2 == "ссылка на форму":
+break
+elif j == 44:
+slovo2 = ""
+break
+
+
+
+print(letter2)
+print(spisok)
+for i in range(len(spisok)):
+if spisok[i] == 'Похожиеслова': 
+
+while spisok[i + 1 + abc] != letter2:
+theend += spisok[i + 1 + abc]
+print(theend)
+abc += 1
+#theend += letter2
+#letter2 += spisok[i + 11]
+#bot.send_message(message.chat.id, theend)
+print(spisok[i + 1 + abc] != letter2)
+key = "key"
+if key == "key":
+theend += letter2
+bot.send_message(message.chat.id, theend)
+break
+
+if key != "key":
+if slovo != "ccskrf1":
+if slovo2 != "ссылка2":
+bot.send_message(message.chat.id, messagetext)
+if key != "key":
+if slovo != "Похожиеслова":
+if slovo2 == "ссылка не найдена":
+bot.send_message(message.chat.id, "к сожалению слово не найдено:(")
 
 
         @bot.message_handler(commands=["start"])
