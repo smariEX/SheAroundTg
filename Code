@@ -4,6 +4,49 @@ import telebot
 
 bot: telebot.TeleBot = telebot.TeleBot('6659669752:AAHyE0s8hafvOmyLpkXMXvlT6JZPPToEQ3c')
 
+@bot.message_handler(commands=['start'])
+def handle_start(message):
+    user_markup = generate_inline_keyboard_markup()
+    bot.send_message(message.chat.id, "Привет! Выберите действие:", reply_markup=user_markup)
+
+@bot.callback_query_handler(func=lambda call: True)
+def handle_inline_buttons(call):
+    if call.message:
+        if call.data == 'button1':
+            bot.send_message(call.message.chat.id, "Бот для создания изображений с помощью ИИ в любом качестве")
+        elif call.data == 'button2':
+            @bot.message_handler(func=lambda message: True)
+            def echo_all(message):
+                prompt = message.text
+                findimg(prompt)
+
+
+
+
+        elif call.data == 'button3':
+            bot.send_message(call.message.chat.id, "kosat1")
+        elif call.data == 'button4':
+            bot.send_message(call.message.chat.id, "В разработке")
+        elif call.data == 'button5':
+            bot.send_message(call.message.chat.id, "В разработке")
+        elif call.data == 'button6':
+            bot.send_message(call.message.chat.id, "В разработке")
+
+
+def generate_inline_keyboard_markup():
+    markup = types.InlineKeyboardMarkup(row_width=2)
+    buttons = [
+        types.InlineKeyboardButton(text='Описание бота', callback_data='button1'),
+        types.InlineKeyboardButton(text='Создание картинок', callback_data='button2'),
+        types.InlineKeyboardButton(text='создатель', callback_data='button3'),
+        types.InlineKeyboardButton(text='Кнопка 4', callback_data='button4'),
+        types.InlineKeyboardButton(text='Кнопка 5', callback_data='button5'),
+        types.InlineKeyboardButton(text='Кнопка 6', callback_data='button6'),
+    ]
+    markup.add(*buttons)
+    return markup
+
+bot.polling(none_stop=True)
 
 
         @bot.message_handler(content_types=['photo'])
